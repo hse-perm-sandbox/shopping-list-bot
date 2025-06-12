@@ -3,13 +3,36 @@
 
 ```mermaid
 C4Container
-    title Диаграмма контейнеров системы ...
-    
+    title Диаграмма контейнеров системы ShoppingListBot
+
+    System_Boundary(boundary, "Система ShoppingListBot") {
+        Container(bot, "Telegram-бот", "Python + Aiogram", "Позволяет пользователю создавать, редактировать и просматривать списки покупок")
+        ContainerDb(db, "База данных", "PostgreSQL", "Хранит структуру списков, категорий, товаров и пользователей")
+    }
+
+    System_Ext(telegram, "Telegram API", "Официальное API Telegram")
+    System_Ext(jwt, "JWT", "Сервис кодирования/декодирования токенов доступа")
+
+    Rel(bot, db, "Чтение и запись данных", "SQL (asyncpg)")
+    Rel(bot, telegram, "Обмен сообщениями с пользователем", "HTTPS")
+    Rel(bot, jwt, "Создание и расшифровка токенов доступа", "HS256")
+
+    UpdateRelStyle(bot, telegram, $offsetX="-180", $offsetY="-40")
+    UpdateRelStyle(bot, db, $offsetY="40")
+    UpdateRelStyle(bot, jwt, $offsetX="10", $offsetY="-40")
+    UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
+
 ```
 
 ## Описание контейнеров:
-1. ...
-2. ...
-
+1. Telegram-bot (Python + aiogram):
+- Создание списков, категорий и товаров в них
+- Просмотр списков
+- Удаление списков, категорий, товаров
+- Совместный доступ к спискам через токены
+2. База данных(PostgreSQL):
+- Хранит данные о пользователях, списках, категориях и товарах.
 ## Внешние системы:
-1. ...
+1. Telegram — платформа для работы бота. Обеспечивает коммуникацию с пользователями.
+2. JWT (JSON Web Token) - используется для безопасного обмена списками между пользователями.
+ Кодирует ID пользователя и название списка.
