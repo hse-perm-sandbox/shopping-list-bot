@@ -11,15 +11,12 @@ C4Container
     }
 
     System_Ext(telegram, "Telegram API", "Официальное API Telegram")
-    System_Ext(jwt, "JWT", "Сервис кодирования/декодирования токенов доступа")
 
     Rel(bot, db, "Чтение и запись данных", "SQL (asyncpg)")
     Rel(bot, telegram, "Обмен сообщениями с пользователем", "HTTPS")
-    Rel(bot, jwt, "Создание и расшифровка токенов доступа", "HS256")
 
     UpdateRelStyle(bot, telegram, $offsetX="-180", $offsetY="-40")
     UpdateRelStyle(bot, db, $offsetY="40")
-    UpdateRelStyle(bot, jwt, $offsetX="10", $offsetY="-40")
     UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
 
 ```
@@ -34,5 +31,4 @@ C4Container
 - Хранит данные о пользователях, списках, категориях и товарах.
 ## Внешние системы:
 1. Telegram — платформа для работы бота. Обеспечивает коммуникацию с пользователями.
-2. JWT (JSON Web Token) - используется для безопасного обмена списками между пользователями.
- Кодирует ID пользователя и название списка.
+
