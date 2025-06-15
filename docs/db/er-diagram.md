@@ -2,23 +2,35 @@
 
 ```mermaid
 erDiagram
-    some_table {
-        integer id PK
-        integer field1
-        string field2
-        datetime field3
-    }
-    
-    other_table {
-        integer id PK
-        string field4
-        boolean field5
-        integer some_table_id FK
+
+    users {
+        int user_id PK
+        varchar username
+        timestamp created_at
     }
 
-    some_table ||--o{ other_table : "some_relation"
+    lists {
+        int list_id PK
+        int user_id FK
+        varchar name
+        timestamp created_at
+    }
+
+    categories {
+        int category_id PK
+        int list_id FK
+        varchar name
+    }
+
+    items {
+        int item_id PK
+        int category_id FK
+        varchar name
+        timestamp added_at
+    }
+
+    users ||--o{ lists : has
+    lists ||--o{ categories : contains
+    categories ||--o{ items : includes
 
 ```
-
-## Описание диаграммы
-Текст описания...
