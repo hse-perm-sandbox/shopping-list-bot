@@ -39,14 +39,14 @@ C4Component
         }
     }
 
-    %% --- Связи между компонентами ---
+
     Rel(handlers, telegram, "Обрабатывает сообщения и команды", "HTTPS")
     Rel(handlers, database, "Чтение и запись данных")
     Rel(handlers, fsm, "Меняет состояния пользователя")
     Rel(handlers, jwt_utils, "Генерирует и проверяет токены")
     Rel(database, db, "Обращается к таблицам", "SQL")
 
-    %% --- Раскладка ---
+
     UpdateLayoutConfig($c4ShapeInRow="1", $c4BoundaryInRow="3")
 ```
 
